@@ -1950,7 +1950,7 @@ void VulkanCommandBuffer::ApplyUniform( VulkanProgram & vulkanProgram, U32 index
 
 		if (Descriptor::IsPushConstant( index, false ))
 		{
-			const U32 translationOffset = 0U; // used only to check if mask constant
+			const size_t translationOffset = 0U; // used only to check if mask constant
 
 			ApplyPushConstant( uniform, 0U, Descriptor::IsMaskPushConstant( index ) ? &translationOffset : NULL, &vulkanProgram, index );
 		}

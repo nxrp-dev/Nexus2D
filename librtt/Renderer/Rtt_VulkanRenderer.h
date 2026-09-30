@@ -76,8 +76,8 @@ struct BufferDescriptor : public Descriptor {
 	virtual void Wipe( VkDevice device, const VkAllocationCallbacks * allocator );
 
 	void SetWorkspace( void * workspace );
-	void TryToAddMemory( std::vector< VkMappedMemoryRange > & ranges, VkDescriptorSet sets[], size_t & count );
-	void TryToAddDynamicOffset( uint32_t offsets[], size_t & count );
+	void TryToAddMemory( std::vector< VkMappedMemoryRange > & ranges, VkDescriptorSet sets[], uint32_t & count );
+	void TryToAddDynamicOffset( uint32_t offsets[], uint32_t & count );
 
 	std::vector< BufferData > fBuffers;
 	VkDescriptorSet fLastSet;

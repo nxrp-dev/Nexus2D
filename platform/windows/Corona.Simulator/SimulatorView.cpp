@@ -385,7 +385,7 @@ bool CSimulatorView::HasApplicationChanged()
 }
 
 // OnTimer - redraw window
-void CSimulatorView::OnTimer(UINT nIDEvent)
+void CSimulatorView::OnTimer(UINT_PTR nIDEvent)
 {
 	CSimulatorApp *applicationPointer = (CSimulatorApp*)AfxGetApp();
 

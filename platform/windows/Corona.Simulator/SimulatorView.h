@@ -112,7 +112,7 @@ class CSimulatorView : public CView
 	protected:
 		virtual void OnDraw(CDC* pDC);
 		virtual void OnUpdate(CView* pSender, LPARAM lHint, CObject *pHint);
-		virtual void OnTimer(UINT nIDEvent);
+		virtual void OnTimer(UINT_PTR nIDEvent);
 
 		DECLARE_MESSAGE_MAP()
 		afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);

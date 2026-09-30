@@ -95,7 +95,9 @@ class SSLSetup
 public:
 
 	SSL_CTX * ctx;
+#if OPENSSL_VERSION_NUMBER < 0x30000000L
 	EC_KEY *ecdh;
+#endif
 
 	SSLSetup(evhttp *httpd)
 	{
@@ -107,8 +109,12 @@ public:
 
 		ctx = SSL_CTX_new(SSLv23_method());
 
+#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+		SSL_CTX_set1_groups_list(ctx, "prime256v1");
+#else
 		ecdh = EC_KEY_new_by_curve_name(NID_X9_62_prime256v1);
 		SSL_CTX_set_tmp_ecdh (ctx, ecdh);
+#endif
 
 		int res = 0;
 
@@ -124,7 +130,9 @@ public:
 	~SSLSetup()
 	{
 		SSL_CTX_free(ctx);
+#if OPENSSL_VERSION_NUMBER < 0x30000000L
 		EC_KEY_free(ecdh);
+#endif
 	}
 };
 

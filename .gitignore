@@ -25,6 +25,10 @@ IDEWorkspaceChecks.plist
 # Build results
 [Dd]ebug/
 [Rr]elease/
+/.build/win64-deps/
+/external/vulkan/Lib64/*.lib
+/external/live-libs64/lib/*.lib
+/external/live-libs64/include/
 
 # Files built by Visual Studio
 *_i.c

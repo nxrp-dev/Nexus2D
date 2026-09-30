@@ -25,6 +25,10 @@
       <Configuration>Release.Simulator</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release.Simulator|x64">
+      <Configuration>Release.Simulator</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\external\ALmixer\luaal.c" />
@@ -174,6 +178,7 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug.CoronaBuilder|Win32'">$(IntDir)Renderer\</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug.Simulator|Win32'">$(IntDir)Renderer\</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|Win32'">$(IntDir)Renderer\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|x64'">$(IntDir)Renderer\</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='PreRelease|Win32'">$(IntDir)Renderer\</ObjectFileName>
     </ClCompile>
     <ClCompile Include="..\..\..\librtt\Renderer\Rtt_GeometryPool.cpp" />
@@ -192,6 +197,7 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug.CoronaBuilder|Win32'">$(IntDir)Renderer\</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug.Simulator|Win32'">$(IntDir)Renderer\</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|Win32'">$(IntDir)Renderer\</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|x64'">$(IntDir)Renderer\</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='PreRelease|Win32'">$(IntDir)Renderer\</ObjectFileName>
     </ClCompile>
     <ClCompile Include="..\..\..\librtt\Renderer\Rtt_Program.cpp" />
@@ -657,6 +663,7 @@
       <BaseFunctionName Condition="'$(Configuration)|$(Platform)'=='Debug.CoronaBuilder|Win32'">remdebug_engine</BaseFunctionName>
       <BaseFunctionName Condition="'$(Configuration)|$(Platform)'=='Debug.Simulator|Win32'">remdebug_engine</BaseFunctionName>
       <BaseFunctionName Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|Win32'">remdebug_engine</BaseFunctionName>
+      <BaseFunctionName Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|x64'">remdebug_engine</BaseFunctionName>
       <BaseFunctionName Condition="'$(Configuration)|$(Platform)'=='PreRelease|Win32'">remdebug_engine</BaseFunctionName>
     </LuaToCpp>
     <LuaToCpp Include="..\..\..\librtt\Corona\CoronaLibrary.lua" />
@@ -863,6 +870,13 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PreRelease|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -900,6 +914,12 @@
     <Import Project="Corona.Rtt.Library.Win32.Internals.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Release.Definitions.props" />
+    <Import Project="Corona.Rtt.Library.Simulator.Definitions.props" />
+    <Import Project="Corona.Rtt.Library.Win32.Internals.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\Release.Definitions.props" />
     <Import Project="Corona.Rtt.Library.Simulator.Definitions.props" />
@@ -1010,6 +1030,32 @@ if NOT EXIST %LIBRARY% (
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>..\..\..\external\vulkan\Lib32;</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release.Simulator|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\..\external\vulkan\Include;..\..\..\external\b2Separator-cpp;..\..\..\external\fft;..\..\..\external\LuaHashMap;..\..\..\external\smoothpolygon;..\..\..\plugins\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VK_USE_PLATFORM_WIN32_KHR;WIN32;_WINDOWS;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>shaderc_combined.lib;spirv-cross-core.lib;spirv-cross-glsl.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>..\..\..\external\vulkan\Lib64;</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PreRelease|Win32'">
